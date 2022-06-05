@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/home-page.2f604cbc.chunk.css","mappings":"AAAA,6BACG,cACH,CAEA,8CACI,iBACJ","sources":["components/RenderMovieList/RenderMovieList.module.css"],"sourcesContent":[".item {\n   font-size: 20px;\n}\n\n.item:not(:last-child) {\n    margin-bottom: 5px;\n}\n\n"],"names":[],"sourceRoot":""}
