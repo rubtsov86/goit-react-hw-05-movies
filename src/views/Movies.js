@@ -11,6 +11,7 @@ const Movies = ({ setPathToGoBack }) => {
   const [movieList, setmovieList] = useState([]);
   const history = useHistory();
   const location = useLocation();
+  const [wrongQuery, setwrongQuery] = useState(false);
 
   useEffect(() => {
     if (location.search === '') {
@@ -23,6 +24,7 @@ const Movies = ({ setPathToGoBack }) => {
   }, [location.search]);
 
   const onSubmit = e => {
+    setwrongQuery(false);
     e.preventDefault();
     setmovieList([]);
     if (!query) {
@@ -35,7 +37,6 @@ const Movies = ({ setPathToGoBack }) => {
     }
     const data = fetchMovies(query);
     MakeMoviesList(data);
-    console.log(MakeMoviesList(data));
 
     history.push({ ...location, search: query });
 
@@ -60,10 +61,7 @@ const Movies = ({ setPathToGoBack }) => {
     const movieData = await data;
     if (movieData.data.results.length === 0) {
       setQuery('');
-      toast.error('no movies found, try something else', {
-        duration: 1500,
-        position: 'top-left',
-      });
+      setwrongQuery(true);
 
       return;
     }
@@ -77,6 +75,7 @@ const Movies = ({ setPathToGoBack }) => {
   return (
     <div>
       <Searchbar onSubmit={onSubmit} query={query} onChange={onChange} />
+      {wrongQuery && <h2>no movies found, try something else</h2>}
       {movieList && (
         <RenderMovieList arrayOfMovies={movieList} onClick={onClick} />
       )}
