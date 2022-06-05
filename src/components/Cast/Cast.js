@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import defaultImage from './profile.png';
 import axios from 'axios';
 import s from './Cast.module.css';
+import PropTypes from 'prop-types';
 
 const Cast = ({ movieId }) => {
   const [castList, setCastList] = useState(null);
@@ -30,7 +31,7 @@ const Cast = ({ movieId }) => {
 
   return (
     castList && (
-      <ul>
+      <ul className={s.list}>
         {castList.map(({ character, name, profile_path, id }) => (
           <li key={id}>
             <img
@@ -52,3 +53,7 @@ const Cast = ({ movieId }) => {
 };
 
 export default Cast;
+
+Cast.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};

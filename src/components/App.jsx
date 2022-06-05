@@ -1,6 +1,6 @@
 import Header from './Header';
 
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 const PopularMoviesList = lazy(() =>
@@ -16,23 +16,23 @@ const MovieCard = lazy(() =>
 );
 
 export function App() {
-  const [data, setData] = useState(null);
+  const [pathToGoBack, setPathToGoBack] = useState('/goit-react-hw-05-movies');
+
+  useEffect(() => {}, []);
+
   return (
     <div>
       <Header />
       <Suspense fallback={<div>Загрузка</div>}>
         <Switch>
-          <Route path="/" exact>
-            <PopularMoviesList setData={setData} />
+          <Route path="/goit-react-hw-05-movies/movies" exact>
+            <Movies setPathToGoBack={setPathToGoBack} />
           </Route>
-          <Route path="/movies" exact>
-            <Movies setData={setData} />
+          <Route path="/goit-react-hw-05-movies/movies/:movieId">
+            <MovieCard pathToGoBack={pathToGoBack} />
           </Route>
-          <Route path="/movies/:movieId">
-            <MovieCard data={data} />
-          </Route>
-          <Route>
-            <h2>Страница не найдена</h2>
+          <Route path="/goit-react-hw-05-movies">
+            <PopularMoviesList setPathToGoBack={setPathToGoBack} />
           </Route>
         </Switch>
       </Suspense>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const Reviews = ({ movieId }) => {
   const [reviews, setReviews] = useState([]);
@@ -41,3 +42,7 @@ const Reviews = ({ movieId }) => {
 };
 
 export default Reviews;
+
+Reviews.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};

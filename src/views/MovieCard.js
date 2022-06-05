@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 import { lazy, Suspense, useEffect, useState } from 'react';
-
+import PropTypes from 'prop-types';
 import RenderMovieCard from 'components/RenderMovieCard';
 
 const Cast = lazy(() =>
@@ -18,7 +18,7 @@ const Reviews = lazy(() =>
   import('components/Reviews' /* webpackChunkName: "Reviews" */)
 );
 
-const MovieCard = ({ data }) => {
+const MovieCard = ({ pathToGoBack }) => {
   const [movie, setMovie] = useState({});
   const { movieId } = useParams();
   const { url } = useRouteMatch();
@@ -39,12 +39,11 @@ const MovieCard = ({ data }) => {
   }, [movieId]);
 
   const onClickGoBack = () => {
-    console.log(data);
-    if (data) {
-      history.push(data);
+    if (pathToGoBack) {
+      history.push(pathToGoBack);
       return;
     }
-    history.push('/');
+    history.push('/goit-react-hw-05-movies');
   };
 
   const { poster_path, title, vote_average, overview, genres } = movie;
@@ -77,3 +76,7 @@ const MovieCard = ({ data }) => {
 };
 
 export default MovieCard;
+
+MovieCard.propTypes = {
+  pathToGoBack: PropTypes.string.isRequired,
+};

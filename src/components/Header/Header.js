@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+
 import s from './Header.module.css';
 
 const Header = () => {
@@ -8,7 +9,7 @@ const Header = () => {
         <li className={s.navListItem}>
           <NavLink
             exact
-            to="/"
+            to="/goit-react-hw-05-movies"
             className={s.navLink}
             activeClassName={s.navLinkActive}
           >
@@ -17,7 +18,7 @@ const Header = () => {
         </li>
         <li className={s.navListItem}>
           <NavLink
-            to="/movies"
+            to="/goit-react-hw-05-movies/movies"
             className={s.navLink}
             activeClassName={s.navLinkActive}
           >

@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import RenderMovieList from '.././components/RenderMovieList';
+import PropTypes from 'prop-types';
 
-const PopularMoviesList = ({ setData }) => {
+const PopularMoviesList = ({ setPathToGoBack }) => {
   const [popularMoviesList, setPopularMoviesList] = useState([]);
   const location = useLocation();
+
   useEffect(() => {
     const fetchPopularMoviesList = () => {
       axios.defaults.baseURL = `https://api.themoviedb.org/3/trending/movie/day?api_key=81b3ecea3e846c75ec6e45ca643cbb3c`;
@@ -27,7 +29,7 @@ const PopularMoviesList = ({ setData }) => {
   }, []);
 
   const onClick = () => {
-    setData(`${location.pathname}`);
+    setPathToGoBack(`${location.pathname}`);
   };
 
   return (
@@ -41,3 +43,7 @@ const PopularMoviesList = ({ setData }) => {
 };
 
 export default PopularMoviesList;
+
+PopularMoviesList.propTypes = {
+  setPathToGoBack: PropTypes.func.isRequired,
+};

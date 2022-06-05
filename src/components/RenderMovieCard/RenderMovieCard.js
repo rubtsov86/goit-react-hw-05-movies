@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import s from './RenderMovieCard.module.css';
 import svg from './arrow-left2.svg';
+import PropTypes from 'prop-types';
 
 const RenderMovieCard = ({
   onClickGoBack,
@@ -35,8 +36,8 @@ const RenderMovieCard = ({
           <p>{genres.map(genre => genre.name).join(', ')}</p>
         </div>
       </div>
-      <div>
-        <h2>Список</h2>
+      <div className={s.AddContainer}>
+        <h2>Additional information</h2>
         <ul>
           <li>
             <NavLink to={`${url}/Cast`}>Cast</NavLink>
@@ -51,3 +52,18 @@ const RenderMovieCard = ({
 };
 
 export default RenderMovieCard;
+
+RenderMovieCard.propTypes = {
+  onClickGoBack: PropTypes.func.isRequired,
+  poster_path: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  vote_average: PropTypes.number.isRequired,
+  overview: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    })
+  ),
+
+  url: PropTypes.string.isRequired,
+};
