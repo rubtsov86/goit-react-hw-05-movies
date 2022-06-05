@@ -1,0 +1,26 @@
+.pageHeader {
+    padding: 25px;
+    font-size: 28px;
+    font-weight: 700;
+    border-bottom: 1px solid black;
+}
+
+.navList {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navListItem:not(:last-child) {
+    margin-right: 20px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: black;
+}
+
+.navLinkActive {
+    color: red;
+}
