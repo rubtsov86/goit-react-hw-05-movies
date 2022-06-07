@@ -25,14 +25,17 @@ export function App() {
       <Header />
       <Suspense fallback={<div>Загрузка</div>}>
         <Switch>
-          <Route path="/goit-react-hw-05-movies/movies" exact>
+          <Route path="/" exact>
+            <PopularMoviesList setPathToGoBack={setPathToGoBack} />
+          </Route>
+          <Route path="/movies" exact>
             <Movies setPathToGoBack={setPathToGoBack} />
           </Route>
-          <Route path="/goit-react-hw-05-movies/movies/:movieId">
+          <Route path="/movies/:movieId">
             <MovieCard pathToGoBack={pathToGoBack} />
           </Route>
-          <Route path="/goit-react-hw-05-movies">
-            <PopularMoviesList setPathToGoBack={setPathToGoBack} />
+          <Route>
+            <h2>404 error, this page doesn't exist</h2>
           </Route>
         </Switch>
       </Suspense>

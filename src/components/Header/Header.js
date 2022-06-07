@@ -9,7 +9,7 @@ const Header = () => {
         <li className={s.navListItem}>
           <NavLink
             exact
-            to="/goit-react-hw-05-movies"
+            to="/"
             className={s.navLink}
             activeClassName={s.navLinkActive}
           >
@@ -18,7 +18,7 @@ const Header = () => {
         </li>
         <li className={s.navListItem}>
           <NavLink
-            to="/goit-react-hw-05-movies/movies"
+            to="/movies"
             className={s.navLink}
             activeClassName={s.navLinkActive}
           >

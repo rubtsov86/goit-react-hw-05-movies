@@ -43,7 +43,7 @@ const MovieCard = ({ pathToGoBack }) => {
       history.push(pathToGoBack);
       return;
     }
-    history.push('/goit-react-hw-05-movies');
+    history.push('/');
   };
 
   const { poster_path, title, vote_average, overview, genres } = movie;

@@ -17,7 +17,9 @@ const Movies = ({ setPathToGoBack }) => {
     if (location.search === '') {
       return;
     }
-    const searchQuery = location.search.slice(1, location.search.length);
+    const searchQuery = location.search.slice(7, location.search.length);
+
+    setQuery(searchQuery);
 
     const data = fetchMovies(searchQuery);
     MakeMoviesList(data);
@@ -38,7 +40,7 @@ const Movies = ({ setPathToGoBack }) => {
     const data = fetchMovies(query);
     MakeMoviesList(data);
 
-    history.push({ ...location, search: query });
+    history.push({ ...location, search: `query=${query}` });
 
     setQuery('');
   };

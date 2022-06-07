@@ -7,7 +7,7 @@ const RenderMovieList = ({ arrayOfMovies, onClick }) => {
     <ul>
       {arrayOfMovies.map(({ id, title }) => (
         <li className={s.item} key={id}>
-          <Link onClick={onClick} to={`/goit-react-hw-05-movies/movies/${id}`}>
+          <Link onClick={onClick} to={`/movies/${id}`}>
             {title}
           </Link>
         </li>
