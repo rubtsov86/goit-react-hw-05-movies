@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import RenderMovieList from 'components/RenderMovieList';
@@ -13,17 +13,28 @@ const Movies = ({ setPathToGoBack }) => {
   const location = useLocation();
   const [wrongQuery, setwrongQuery] = useState(false);
 
+  const onSearch = useCallback(() => {
+    return location.search.slice(7, location.search.length);
+  }, [location.search]);
+
   useEffect(() => {
-    if (location.search === '') {
+    const searchQuery = onSearch();
+    console.log(searchQuery);
+
+    if (!searchQuery) {
       return;
     }
-    const searchQuery = location.search.slice(7, location.search.length);
+
+    // if (location.search === '') {
+    //   return;
+    // }
+    // const searchQuery = location.search.slice(7, location.search.length);
 
     setQuery(searchQuery);
 
     const data = fetchMovies(searchQuery);
     MakeMoviesList(data);
-  }, []);
+  }, [onSearch]);
 
   const onSubmit = e => {
     setwrongQuery(false);
