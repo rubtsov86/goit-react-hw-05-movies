@@ -8,10 +8,10 @@ const Header = () => {
       <ul className={s.navList}>
         <li className={s.navListItem}>
           <NavLink
-            exact
             to="/"
-            className={s.navLink}
-            activeClassName={s.navLinkActive}
+            className={({ isActive }) =>
+              isActive ? s.navLinkActive : s.navLink
+            }
           >
             Home
           </NavLink>
@@ -19,8 +19,9 @@ const Header = () => {
         <li className={s.navListItem}>
           <NavLink
             to="/movies"
-            className={s.navLink}
-            activeClassName={s.navLinkActive}
+            className={({ isActive }) =>
+              isActive ? s.navLinkActive : s.navLink
+            }
           >
             Movies
           </NavLink>

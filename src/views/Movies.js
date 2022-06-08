@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import RenderMovieList from 'components/RenderMovieList';
 import Searchbar from 'components/Searchbar';
 import toast, { Toaster } from 'react-hot-toast';
@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 const Movies = ({ setPathToGoBack }) => {
   const [query, setQuery] = useState('');
   const [movieList, setmovieList] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const [wrongQuery, setwrongQuery] = useState(false);
 
@@ -23,7 +23,7 @@ const Movies = ({ setPathToGoBack }) => {
 
     const data = fetchMovies(searchQuery);
     MakeMoviesList(data);
-  }, [location.search]);
+  }, []);
 
   const onSubmit = e => {
     setwrongQuery(false);
@@ -39,9 +39,7 @@ const Movies = ({ setPathToGoBack }) => {
     }
     const data = fetchMovies(query);
     MakeMoviesList(data);
-
-    history.push({ ...location, search: `query=${query}` });
-
+    navigate(`${location.pathname}?query=${query}`);
     setQuery('');
   };
 

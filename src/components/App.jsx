@@ -1,7 +1,7 @@
 import Header from './Header';
 
-import { lazy, Suspense, useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { lazy, Suspense, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 const PopularMoviesList = lazy(() =>
   import('views/PopularMoviesList' /* webpackChunkName: "home-page" */)
@@ -18,26 +18,25 @@ const MovieCard = lazy(() =>
 export function App() {
   const [pathToGoBack, setPathToGoBack] = useState('/goit-react-hw-05-movies');
 
-  useEffect(() => {}, []);
-
   return (
     <div>
       <Header />
       <Suspense fallback={<div>Загрузка</div>}>
-        <Switch>
-          <Route path="/" exact>
-            <PopularMoviesList setPathToGoBack={setPathToGoBack} />
-          </Route>
-          <Route path="/movies" exact>
-            <Movies setPathToGoBack={setPathToGoBack} />
-          </Route>
-          <Route path="/movies/:movieId">
-            <MovieCard pathToGoBack={pathToGoBack} />
-          </Route>
-          <Route>
-            <h2>404 error, this page doesn't exist</h2>
-          </Route>
-        </Switch>
+        <Routes>
+          <Route
+            path="/"
+            element={<PopularMoviesList setPathToGoBack={setPathToGoBack} />}
+          />
+          <Route
+            path="/movies"
+            element={<Movies setPathToGoBack={setPathToGoBack} />}
+          ></Route>
+          <Route
+            path="/movies/:movieId/*"
+            element={<MovieCard pathToGoBack={pathToGoBack} />}
+          ></Route>
+          <Route element={<h2>404 error, this page doesn't exist</h2>}></Route>
+        </Routes>
       </Suspense>
     </div>
   );

@@ -1,10 +1,4 @@
-import {
-  useRouteMatch,
-  Route,
-  Switch,
-  useHistory,
-  useParams,
-} from 'react-router-dom';
+import { Route, Routes, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -21,8 +15,9 @@ const Reviews = lazy(() =>
 const MovieCard = ({ pathToGoBack }) => {
   const [movie, setMovie] = useState({});
   const { movieId } = useParams();
-  const { url } = useRouteMatch();
-  const history = useHistory();
+  const navigate = useNavigate();
+
+  const url = `/movies/${movieId}`;
 
   useEffect(() => {
     const fetchMovieCard = () => {
@@ -39,11 +34,12 @@ const MovieCard = ({ pathToGoBack }) => {
   }, [movieId]);
 
   const onClickGoBack = () => {
+    console.log(pathToGoBack);
     if (pathToGoBack) {
-      history.push(pathToGoBack);
+      navigate(pathToGoBack);
       return;
     }
-    history.push('/');
+    navigate('/');
   };
 
   const { poster_path, title, vote_average, overview, genres } = movie;
@@ -61,14 +57,13 @@ const MovieCard = ({ pathToGoBack }) => {
           url={url}
         />
         <Suspense fallback={<div>Загрузка</div>}>
-          <Switch>
-            <Route path={`${url}/Cast`}>
-              <Cast movieId={movieId} />
-            </Route>
-            <Route path={`${url}/Reviews`}>
-              <Reviews movieId={movieId} />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path={`/Cast`} element={<Cast movieId={movieId} />}></Route>
+            <Route
+              path={`/Reviews`}
+              element={<Reviews movieId={movieId} />}
+            ></Route>
+          </Routes>
         </Suspense>
       </>
     )

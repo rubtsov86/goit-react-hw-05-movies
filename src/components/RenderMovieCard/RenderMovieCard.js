@@ -64,6 +64,4 @@ RenderMovieCard.propTypes = {
       name: PropTypes.string.isRequired,
     })
   ),
-
-  url: PropTypes.string.isRequired,
 };
